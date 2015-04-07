@@ -303,18 +303,51 @@ angular.module('MaYW', [])
 
 //        domainList.domains = domainList.retrieveDomain(); // retrieving
         domainList.domains = [
-            {text:'learn angular', done:true},
-            {text:'build an angular app', done:false}];
+            {
+                regex: "This1",
+                if_replace: true,
+                if_render: true,
+                r_left: "F",
+                r_right: "R",
+                inline: true,
+                i_left: "C",
+                i_right: "F,",
+                alignment: "r",
+                old: true
+            }, {domain: "This2"}, {domain: "This3"}
 
+        ];
 
-        domainList.addDomain = function() {
-            domainList.domains.push({text: domainList.domainText, done: false});
+        domainList.debug = function() {
+            for(var i = 0; i < domainList.size(); ++i) {
+                console.log(domainList.domains[i][domain])
+            }
+            return domainList.domains;
+        };
+
+        domainList.addDomain = function(domain) {
+            domainList.domains.push(domain);
             console.log(domainList);
             console.log(typeof domainList.domains);
         };
 
         domainList.fuck = "Fuck yourself!";
 
+        domainList.addNewRow = function() {
+            domainList.addDomain({
+                    regex: "",
+                    if_replace: false,
+                    if_render: false,
+                    r_left: "",
+                    r_right: "",
+                    inline: false,
+                    i_left: "",
+                    i_right: "",
+                    alignment: "",
+                    old: false
+                }
+            )
+        };
 
         domainList.activated = function() {
             var count = 0;

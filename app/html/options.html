@@ -1,25 +1,34 @@
 <head>
     <title>Options</title>
     <script src="/components/angular/angular.min.js"></script>
-    <link href="/components/bootstrap/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/components/bootstrap/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/components/bootstrap/dist/css/bootstrap.css">
+    <link rel="stylesheet" href="/components/bootstrap/dist/css/bootstrap-theme.css">
+    <link rel="stylesheet" href="/components/bootstrap/dist/css/bootstrap-theme.min.css">
+    <link rel="stylesheet" href="/app/css/layout.css">
     <style>
         html, body, div, form, fieldset, legend, label, img, td, th, textarea {
             margin: 0;
             padding: 0;
         }
+
         table {
             border-collapse: collapse;
             border-spacing: 0;
         }
+
         html, body {
             overflow: hidden;
         }
+
         #resetRuleButton {
             color: red;
         }
+
         textarea {
             resize: none;
         }
+
         #virtual-body {
             position: fixed;
             top: 30px;
@@ -30,6 +39,7 @@
             overflow-x: auto;
             overflow-y: auto;
         }
+
         #message {
             font-size: 20px;
             color: gray;
@@ -41,75 +51,142 @@
 </head>
 
 <body ng-app="MaYW" ng-csp>
-    <div>
-        <label>Name:</label>
-        <input type="text" ng-model="yourName" placeholder="Enter a name here">
-        <hr>
-        <h1>Hello {{yourName}}!</h1>
+<div>
+    <label>Name:</label>
+    <input type="text" ng-model="yourName" placeholder="Enter a name here">
+    <hr>
+    <h1>Hello {{yourName}}!</h1>
+</div>
+
+
+<div ng-controller="DomainListController as domainList">
+
+    <span>{{domainList.activated()}} out of {{domainList.size()}}</span>
+
+    <form ng-submit="domainList.addDomain()">
+
+        <input type="text" ng-model="domainList.domainText" size="30"
+               placeholder="add new todo here">
+        <input class="btn-primary" type="submit" value="add">
+    </form>
+
+</div>
+
+<div>
+    Fuck
+</div>
+
+
+
+<div id='message' align=center></div>
+<div
+        id='virtual-body'>
+    <table
+            align=center
+            width="auto"
+            border="0">
+        <tr>
+            <td
+                    colspan=2
+                    align=center>
+                <button
+                        id="addRowButton">Add
+                    New
+                    Row
+                </button>
+            </td>
+        </tr>
+        <tr>
+            <td
+                    colspan=1
+                    align=center>
+                <button
+                        id="saveRuleButton">Save
+                    the
+                    Rules
+                </button>
+            </td>
+            <td
+                    colspan=1
+                    align=center>
+                <button
+                        id="resetRuleButton">Reset
+                    the
+                    Rules
+                </button>
+            </td>
+        </tr>
+    </table>
+</div>
+
+<div class="container-fluid" ng-controller="DomainListController as domainList">
+    <div class="row">
+        <div class="col-md-12">
+            <h3 class="text-center">
+                Options
+            </h3>
+
+            <div class="row">
+                <div class="col-md-8">fd</div>
+                <!--<div class="col-md-4"><input type="text" class="search-query" id="domain_search"></div>-->
+            </div>
+
+            <div class="row">
+                <div class="col-md-10">
+                    <table class="table">
+                        <thead>
+                        <tr>
+                            <th rowspan="2">Regex that matches domain</th>
+                            <th rowspan="2">Replace</th>
+                            <th colspan="3">Render</th>
+
+                            <th colspan="3">Inline Render</th>
+
+                            <th>Align</th>
+                        </tr>
+                        <tr>
+
+                            <th>Switch</th>
+                            <th>L</th>
+                            <th>R</th>
+                            <th>Switch</th>
+                            <th>L</th>
+                            <th>R</th>
+                            <th>Align</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr ng-repeat="domain in domainList.domains">
+                            <td><input value="{{domain.regex}}"></td>
+                            <td>{{domain.if_replace}}</td>
+                            <td>{{domain.if_render}}</td>
+                            <td><input value="{{domain.r_left}}"></td>
+                            <td><input value="{{domain.r_right}}"></td>
+                            <td>{{domain.inline}}</td>
+                            <td><input value="{{domain.i_left}}"></td>
+                            <td><input value="{{domain.i_right}}"></td>
+                            <td>{{domain.alignment}}</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="col-md-2 vwrapper">
+                <div class="vcenter">
+                    <div class=" vcenter">
+                        <button class="btn btn-default" type="button" ng-click="domainList.addNewRow()">Add New Row</button>
+                        <button class="btn btn-success" type="button">Save the Rules</button>
+                        <button class="btn btn-danger" type="button">Reset the Rules</button>
+
+                    </div>
+                </div>
+                </div>
+            </div>
+        </div>
     </div>
+</div>
 
+<!--Todo: Add grammar check?-->
 
-    <div ng-controller="DomainListController as domainList">
-
-        <span>{{domainList.activated()}} out of {{domainList.size()}}</span>
-
-        <form ng-submit="domainList.addDomain()">
-
-            <input type="text" ng-model="domainList.domainText"  size="30"
-                   placeholder="add new todo here">
-            <input class="btn-primary" type="submit" value="add">
-        </form>
-
-    </div>
-
-    <div>
-        Fuck
-    </div>
-
-
- </form>
-
-    <div id='message' align=center></div>
-    <div
-            id='virtual-body'>
-        <table
-                align=center
-                width="auto"
-                border="0">
-            <tr>
-                <td
-                        colspan=2
-                        align=center>
-                    <button
-                            id="addRowButton">Add
-                        New
-                        Row
-                    </button>
-                </td>
-            </tr>
-            <tr>
-                <td
-                        colspan=1
-                        align=center>
-                    <button
-                            id="saveRuleButton">Save
-                        the
-                        Rules
-                    </button>
-                </td>
-                <td
-                        colspan=1
-                        align=center>
-                    <button
-                            id="resetRuleButton">Reset
-                        the
-                        Rules
-                    </button>
-                </td>
-            </tr>
-        </table>
-    </div>
-
-            <script
-            src="../chrome/options.js"></script>
+<script
+        src="../chrome/options.js"></script>
 </body>

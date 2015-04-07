@@ -1,0 +1,17 @@
+.vcenter {
+    display: inline-block;
+    vertical-align: middle;
+    float: none;
+}
+
+.vwrapper {
+    height: 100%;
+}
+
+.btn {
+    margin: 5px 5px 5px 5px
+}
+
+th {
+    alignment: center;
+}
