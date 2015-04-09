@@ -16,6 +16,7 @@ angular.module('MaYW_Popup', ['ngRoute'])
 
             return function() {
                 self.rules = [{
+                    id: 1,
                     regex: "This1",
                     if_replace: true,
                     if_render: true,
@@ -27,6 +28,7 @@ angular.module('MaYW_Popup', ['ngRoute'])
                     alignment: "r",
                     old: true
                 },{
+                    id: 2,
                     regex: "This2",
                     if_replace: true,
                     if_render: true,
@@ -38,6 +40,7 @@ angular.module('MaYW_Popup', ['ngRoute'])
                     alignment: "r",
                     old: true
                 },{
+                    id: 3,
                     regex: "This3",
                     if_replace: true,
                     if_render: true,
@@ -58,26 +61,35 @@ angular.module('MaYW_Popup', ['ngRoute'])
 
     }) // The service that retrieves data from local storage?
 
+    .config( [
+        '$compileProvider',
+        function( $compileProvider )
+        {
+            $compileProvider.aHrefSanitizationWhitelist(/^\s*(https?|ftp|mailto|chrome-extension):/);
+            // Angular before v1.2 uses $compileProvider.urlSanitizationWhitelist(...)
+        }
+    ])
+
 // write the router
 .config(function($routeProvider) {
     $routeProvider
         .when('/', {
             controller: 'RuleListController as ruleList',
-            templateUrl: '/app/html/popup_main.html',
+            templateUrl: '/app/html/templates/popup_main.html',
             resolve: {
                 rules: function(Rules) {
                     return Rules.fetch();
                 }
             }
         })
-        //.when('/edit/:domainId', {
-        //    controller: 'EditRuleController as editRules',
-        //    templateUrl: 'popup_detail.html'
-        //})
-        //.when('/edit/:ruleId', {
-        //    controller: 'NewRuleController as editRules',
-        //    templateUrl: 'popup_detail.html'
-        //})
+        .when('/edit/:ruleId', {
+            controller: 'EditRuleController as editRules',
+            templateUrl: '/app/html/templates/popup_detail.html'
+        })
+        .when('/new', {
+            controller: 'NewRuleController as editRules',
+            templateUrl: '/app/html/templates/popup_detail.html'
+        })
         .otherwise({
             redirectTo: '/'
         })
@@ -95,6 +107,7 @@ angular.module('MaYW_Popup', ['ngRoute'])
         ruleList.rules = rules;
 
         this.rules = [{
+            id: 1,
             regex: "This1",
             if_replace: true,
             if_render: true,
@@ -106,6 +119,7 @@ angular.module('MaYW_Popup', ['ngRoute'])
             alignment: "r",
             old: true
         },{
+            id: 2,
             regex: "This2",
             if_replace: true,
             if_render: true,
@@ -117,6 +131,7 @@ angular.module('MaYW_Popup', ['ngRoute'])
             alignment: "r",
             old: true
         },{
+            id: 3,
             regex: "This3",
             if_replace: true,
             if_render: true,
@@ -128,12 +143,12 @@ angular.module('MaYW_Popup', ['ngRoute'])
             alignment: "r",
             old: true
         }]
-    });
+    })
 
-//.controller('NewRuleController', function($location, Rules) {
-//
-//    })
-//
-//    .controller('EditRuleController', function($location, $routeParams, Rules) {
-//
-//    });
+.controller('NewRuleController', function($location, Rules) {
+
+    })
+
+.controller('EditRuleController', function($location, $routeParams, Rules) {
+
+    });

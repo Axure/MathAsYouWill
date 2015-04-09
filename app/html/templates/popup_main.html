@@ -7,7 +7,7 @@
         <th>Replace</th>
         <th>Render</th>
         <th>Inline Render</th>
-        <th></th>
+        <th><a href="#/new"><i class="icon-p    lus-sign">s</i></a></th>
     </tr>
     </thead>
     <tbody>
@@ -16,7 +16,7 @@
         <td><input type="checkbox" ng-model="rule.if_replace" ng-disabled=true></td>
         <td><input type="checkbox" ng-model="rule.if_render" ng-disabled=true></td>
         <td><input type="checkbox" ng-model="rule.inline" ng-disabled=true></td>
-        <td><button class="btn btn-xs btn-primary">Edit</button></td>
+        <td><a class="btn btn-xs btn-primary" ng-href="#/edit/{{rule.id}}">Edit</a></td>
     </tr>
     </tbody>
 </table>
