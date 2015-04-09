@@ -18,7 +18,7 @@
         }
 
         html, body {
-            overflow: hidden;
+            overflow: auto;
         }
 
         #resetRuleButton {
@@ -50,7 +50,7 @@
     </style>
 </head>
 
-<body ng-app="MaYW" ng-csp>
+<body ng-app="MaYW_Options" ng-csp>
 <div>
     <label>Name:</label>
     <input type="text" ng-model="yourName" placeholder="Enter a name here">
@@ -133,6 +133,43 @@
 
             <div class="row">
                 <div class="col-md-10">
+                    <table class="table">
+                        <thead>
+                        <tr>
+                            <th rowspan="2">Regex that matches domain</th>
+                            <th rowspan="2">Replace</th>
+                            <th colspan="3">Render</th>
+
+                            <th colspan="3">Inline Render</th>
+
+                            <th>Align</th>
+                        </tr>
+                        <tr>
+
+                            <th>Switch</th>
+                            <th>L</th>
+                            <th>R</th>
+                            <th>Switch</th>
+                            <th>L</th>
+                            <th>R</th>
+                            <th>Align</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr ng-repeat="domain in domainList.domains">
+                            <td>{{domain.regex}}</td>
+                            <td>{{domain.if_replace}}</td>
+                            <td>{{domain.if_render}}</td>
+                            <td>{{domain.r_left}}</td>
+                            <td>{{domain.r_right}}</td>
+                            <td>{{domain.inline}}</td>
+                            <td>{{domain.i_left}}</td>
+                            <td>{{domain.i_right}}</td>
+                            <td>{{domain.alignment}}</td>
+                            <td><button class="btn btn-primary">+</button></td>
+                        </tr>
+                        </tbody>
+                    </table>
                     <table class="table">
                         <thead>
                         <tr>

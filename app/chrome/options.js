@@ -297,7 +297,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
 
 
-angular.module('MaYW', [])
+angular.module('MaYW_Options', [])
     .controller('DomainListController', function() {
        var domainList = this;
 
