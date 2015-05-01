@@ -6,8 +6,8 @@
         <th>Regex</th>
         <th>Replace</th>
         <th>Render</th>
-        <th>Inline Render</th>
-        <th><a href="#/new"><i class="icon-p    lus-sign">s</i></a></th>
+        <th>Inline</th>
+        <th><a href="#/new" class="btn btn-success btn-xs"><span class="glyphicon glyphicon-plus"></span></a></th>
     </tr>
     </thead>
     <tbody>
@@ -16,7 +16,7 @@
         <td><input type="checkbox" ng-model="rule.if_replace" ng-disabled=true></td>
         <td><input type="checkbox" ng-model="rule.if_render" ng-disabled=true></td>
         <td><input type="checkbox" ng-model="rule.inline" ng-disabled=true></td>
-        <td><a class="btn btn-xs btn-primary" ng-href="#/edit/{{rule.id}}">Edit</a></td>
+        <td><a class="btn btn-xs btn-primary" ng-href="#/edit/{{rule.id}}"><span class="glyphicon glyphicon-edit"></span></a></td>
     </tr>
     </tbody>
 </table>
