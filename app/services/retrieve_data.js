@@ -4,6 +4,7 @@
 	angular
 		.module('MaYW')
 		.service('GetDomainList', GetDomainList);
+		.service('SetDomainList', SetDomainList);
 
 
 
@@ -29,5 +30,29 @@
 
 
 	}
+
+	SetDomainList.$inject = ['$q'];
+	function SetDomainList() {
+		return {
+			set: function set(domainList) {
+				var deferred = $q.defer();
+
+				storage.set({
+					'domainList': domainList
+				}, function () {
+					if (domainList.length === 0) {
+						storage.remove('domainList', function () {
+							deferred.resolve('Data removed');
+						});
+					} else {
+						deferred.resolve('Successfully saved!');
+					}
+				});
+
+				return deferred.promise;
+			}
+		}
+	}
+
 
 })(angular);
