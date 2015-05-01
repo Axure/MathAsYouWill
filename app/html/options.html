@@ -4,6 +4,7 @@
     <link rel="stylesheet" href="/components/bootstrap/dist/css/bootstrap.css">
     <link rel="stylesheet" href="/components/bootstrap/dist/css/bootstrap-theme.css">
     <link rel="stylesheet" href="/app/css/layout.css">
+    <script src="/app/services/retrieve_data.js"></script>
     <style>
         html, body, div, form, fieldset, legend, label, img, td, th, textarea {
             margin: 0;
@@ -48,87 +49,19 @@
     </style>
 </head>
 
-<body ng-app="MaYW_Options" ng-csp>
-<div>
-    <label>Name:</label>
-    <input type="text" ng-model="yourName" placeholder="Enter a name here">
-    <hr>
-    <h1>Hello {{yourName}}!</h1>
-</div>
-
-
-<div ng-controller="DomainListController as domainList">
-
-    <span>{{domainList.activated()}} out of {{domainList.size()}}</span>
-
-    <form ng-submit="domainList.addDomain()">
-
-        <input type="text" ng-model="domainList.domainText" size="30"
-               placeholder="add new todo here">
-        <input class="btn-primary" type="submit" value="add">
-    </form>
-
-</div>
-
-<div>
-    Fuck
-</div>
+<body ng-app="MaYW" ng-csp>
 
 
 
-<div id='message' align=center></div>
-<div
-        id='virtual-body'>
-    <table
-            align=center
-            width="auto"
-            border="0">
-        <tr>
-            <td
-                    colspan=2
-                    align=center>
-                <button
-                        id="addRowButton">Add
-                    New
-                    Row
-                </button>
-            </td>
-        </tr>
-        <tr>
-            <td
-                    colspan=1
-                    align=center>
-                <button
-                        id="saveRuleButton">Save
-                    the
-                    Rules
-                </button>
-            </td>
-            <td
-                    colspan=1
-                    align=center>
-                <button
-                        id="resetRuleButton">Reset
-                    the
-                    Rules
-                </button>
-            </td>
-        </tr>
-    </table>
-</div>
 
-<div class="container-fluid" ng-controller="DomainListController as domainList">
+<div class="container-fluid" ng-controller="OptionController as option">
     <div class="row">
         <div class="col-md-12">
             <h3 class="text-center">
                 Options
             </h3>
 
-            <div class="row">
-                <div class="col-md-8">fd</div>
-                <!--<div class="col-md-4"><input type="text" class="search-query" id="domain_search"></div>-->
-            </div>
-
+{{option.domainList}}
             <div class="row">
                 <div class="col-md-10">
                     <table class="table">
@@ -154,7 +87,7 @@
                         </tr>
                         </thead>
                         <tbody>
-                        <tr ng-repeat="domain in domainList.domains">
+                        <tr ng-repeat="domain in option.domainList">
                             <td>{{domain.regex}}</td>
                             <td>{{domain.if_replace}}</td>
                             <td>{{domain.if_render}}</td>
@@ -165,6 +98,7 @@
                             <td>{{domain.i_right}}</td>
                             <td>{{domain.alignment}}</td>
                             <td><button class="btn btn-primary">+</button></td>
+                            <td><button class="btn btn-success" type="button" ng-click="option.delRow(domain)">Save the Rules</button></td>
                         </tr>
                         </tbody>
                     </table>
@@ -191,7 +125,7 @@
                         </tr>
                         </thead>
                         <tbody>
-                        <tr ng-repeat="domain in domainList.domains">
+                        <tr ng-repeat="domain in option.domainList">
                             <td><input value="{{domain.regex}}"></td>
                             <td>{{domain.if_replace}}</td>
                             <td>{{domain.if_render}}</td>
@@ -201,6 +135,7 @@
                             <td><input value="{{domain.i_left}}"></td>
                             <td><input value="{{domain.i_right}}"></td>
                             <td>{{domain.alignment}}</td>
+                            <button class="btn btn-success" type="button" ng-click="option.delRow(domain)">Save the Rules</button>
                         </tr>
                         </tbody>
                     </table>
@@ -208,9 +143,9 @@
                 <div class="col-md-2 vwrapper">
                 <div class="vcenter">
                     <div class=" vcenter">
-                        <button class="btn btn-default" type="button" ng-click="domainList.addNewRow()">Add New Row</button>
-                        <button class="btn btn-success" type="button">Save the Rules</button>
-                        <button class="btn btn-danger" type="button">Reset the Rules</button>
+                        <button class="btn btn-default" type="button" ng-click="option.addRow()">Add New Row</button>
+                        <button class="btn btn-success" type="button" ng-click="option.delRow($event)">Save the Rules</button>
+                        <button class="btn btn-danger" type="button" ng-click="option.resetRules()">Reset the Rules</button>
 
                     </div>
                 </div>
