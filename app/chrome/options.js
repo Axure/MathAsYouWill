@@ -381,3 +381,35 @@ angular.module('MaYW_Options', [])
 
 
     });
+
+
+
+(function(angular) {
+    angular
+        .module('MaYW', ['services'])
+        .controller('OptionController', OptionPageController);
+
+    OptionPageController.$inject = ['GetDomainList'];
+    function OptionPageController(GetDomainList) {
+
+        var vm = this;
+
+
+        function loadDomainList() {
+            GetDomainList.get().then(
+                function(domainList) {
+                    vm.domainList = domainList;
+                },
+                function(message) {
+                    // Do something with the message
+                });
+        }
+
+
+
+
+
+
+
+    }
+})(angular);
