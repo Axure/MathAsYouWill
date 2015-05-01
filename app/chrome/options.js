@@ -23,7 +23,7 @@
                 inline: true,
                 i_left: "C",
                 i_right: "F,",
-                alignment: "r",
+                alignment: "R",
                 old: true,
                 isEnabled: true
             }, {domain: "This2", isEnabled: true}, {domain: "This3", isEnabled: false}

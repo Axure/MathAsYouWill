@@ -6,6 +6,10 @@
     <link rel="stylesheet" href="/app/css/layout.css">
     <script src="/app/services/retrieve_data.js"></script>
     <style>
+        label {
+            display: block;
+        }
+
         html, body, div, form, fieldset, legend, label, img, td, th, textarea {
             margin: 0;
             padding: 0;
@@ -102,7 +106,7 @@
                         </tr>
                         </tbody>
                     </table>
-                    <table class="table">
+                    <table class="table table-striped table-responsive table-hover">
                         <thead>
                         <tr>
                             <th rowspan="2">Regex that matches domain</th>
@@ -111,7 +115,7 @@
 
                             <th colspan="3">Inline Render</th>
 
-                            <th>Align</th>
+                            <th rowspan="2" colspan="3">Align Type</th>
                         </tr>
                         <tr>
 
@@ -121,21 +125,29 @@
                             <th>Switch</th>
                             <th>L</th>
                             <th>R</th>
-                            <th>Align</th>
                         </tr>
                         </thead>
                         <tbody>
                         <tr ng-repeat="domain in option.domainList | filter: option.enabledModel">
-                            <td><input value="{{domain.regex}}"></td>
-                            <td>{{domain.if_replace}}</td>
-                            <td>{{domain.if_render}}</td>
-                            <td><input value="{{domain.r_left}}"></td>
-                            <td><input value="{{domain.r_right}}"></td>
-                            <td>{{domain.inline}}</td>
-                            <td><input value="{{domain.i_left}}"></td>
-                            <td><input value="{{domain.i_right}}"></td>
-                            <td>{{domain.alignment}}</td>
-                            <button class="btn btn-success" type="button" ng-click="option.delRow(domain)">Save the Rules</button>
+                            <td><input value="{{domain.regex}}" class="form-control"></td>
+                            <td><input type="checkbox" ng-model="domain.if_replace"></td>
+                            <td><input type="checkbox" ng-model="domain.if_render"></td>
+                            <td><input value="{{domain.r_left}}" class="form-control"></td>
+                            <td><input value="{{domain.r_right}}" class="form-control"></td>
+                            <td><input type="checkbox" ng-model="domain.inline"></td>
+                            <td><input value="{{domain.i_left}}" class="form-control"></td>
+                            <td><input value="{{domain.i_right}}" class="form-control"></td>
+                            <td>
+                                <div class="form-group"><label class="radio inline"><input type="radio" ng-model="domain.alignment" value="L">L</label></div>
+                            </td>
+                            <td>
+                                <div class="form-group"><label class="radio inline"><input type="radio" ng-model="domain.alignment" value="C">C</label></div>
+                            </td>
+                            <td>
+                                <div class="form-group"><label class="radio inline"><input type="radio" ng-model="domain.alignment" value="R">R</label></div>
+                            </td>
+                            <td><button class="btn btn-danger" type="button" ng-click="option.delRow(domain)">-</button></td>
+
                         </tr>
                         </tbody>
                     </table>
