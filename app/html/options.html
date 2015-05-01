@@ -15,6 +15,11 @@
             padding: 0;
         }
 
+        td, th {
+            text-align: center;
+            vertical-align: middle !important;
+        }
+
         table {
             border-collapse: collapse;
             border-spacing: 0;
@@ -106,7 +111,7 @@
                         </tr>
                         </tbody>
                     </table>
-                    <table class="table table-striped table-responsive table-hover">
+                    <table class="table table-striped table-responsive table-hover table-bordered">
                         <thead>
                         <tr>
                             <th rowspan="2">Regex that matches domain</th>
@@ -115,7 +120,7 @@
 
                             <th colspan="3">Inline Render</th>
 
-                            <th rowspan="2" colspan="3">Align Type</th>
+                            <th rowspan="2" colspan="1">Align Type</th>
                             <th rowspan="2">Delete</th>
                         </tr>
                         <tr>
@@ -130,7 +135,7 @@
                         </thead>
                         <tbody>
                         <tr ng-repeat="domain in option.domainList | filter: option.enabledModel">
-                            <td><input value="{{domain.regex}}" class="form-control"></td>
+                            <td class="col-md-4"><input value="{{domain.regex}}" class="form-control"></td>
                             <td><input type="checkbox" ng-model="domain.if_replace"></td>
                             <td><input type="checkbox" ng-model="domain.if_render"></td>
                             <td><input value="{{domain.r_left}}" class="form-control"></td>
@@ -138,14 +143,16 @@
                             <td><input type="checkbox" ng-model="domain.inline"></td>
                             <td><input value="{{domain.i_left}}" class="form-control"></td>
                             <td><input value="{{domain.i_right}}" class="form-control"></td>
-                            <td>
-                                <div class="form-group"><label class="radio inline"><input type="radio" ng-model="domain.alignment" value="L">L</label></div>
-                            </td>
-                            <td>
-                                <div class="form-group"><label class="radio inline"><input type="radio" ng-model="domain.alignment" value="C">C</label></div>
-                            </td>
-                            <td>
-                                <div class="form-group"><label class="radio inline"><input type="radio" ng-model="domain.alignment" value="R">R</label></div>
+                            <td class="col-md-2">
+                                <label class="radio-inline">
+                                    <input name="alignment" value="left" type="radio"> L
+                                </label>
+                                <label class="radio-inline">
+                                    <input name="alignment" value="center" type="radio"> C
+                                </label>
+                                <label class="radio-inline">
+                                    <input name="alignment" value="right" type="radio"> R
+                                </label>
                             </td>
                             <td><button class="btn btn-danger" type="button" ng-click="option.delRow(domain)">-</button></td>
 
@@ -153,7 +160,10 @@
                         </tbody>
                     </table>
                 </div>
-                <div class="col-md-2 vwrapper">
+
+            </div>
+
+            <div class="col-md-12 vwrapper">
                 <div class="vcenter">
                     <div class=" vcenter">
                         <button class="btn btn-default" type="button" ng-click="option.addRow()">Add New Row</button>
@@ -161,7 +171,6 @@
                         <button class="btn btn-danger" type="button" ng-click="option.resetRules()">Reset the Rules</button>
 
                     </div>
-                </div>
                 </div>
             </div>
         </div>
