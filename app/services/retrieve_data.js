@@ -2,14 +2,14 @@
 	'use strict';
 
 	angular
-		.module('MaYW')
+		.module('services', [])
 		.service('GetDomainList', GetDomainList)
 		.service('SetDomainList', SetDomainList);
 
 	var storage = chrome.storage.local;
 
 	GetDomainList.$inject = ['$q'];
-	function GetDomainList() {
+	function GetDomainList($q) {
 
 		return {
 			get: function() {
@@ -32,7 +32,7 @@
 	}
 
 	SetDomainList.$inject = ['$q'];
-	function SetDomainList() {
+	function SetDomainList($q) {
 		return {
 			set: function set(domainList) {
 				var deferred = $q.defer();
