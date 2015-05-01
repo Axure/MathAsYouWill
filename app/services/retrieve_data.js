@@ -3,10 +3,10 @@
 
 	angular
 		.module('MaYW')
-		.service('GetDomainList', GetDomainList);
+		.service('GetDomainList', GetDomainList)
 		.service('SetDomainList', SetDomainList);
 
-
+	var storage = chrome.storage.local;
 
 	GetDomainList.$inject = ['$q'];
 	function GetDomainList() {
