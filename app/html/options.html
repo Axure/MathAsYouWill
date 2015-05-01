@@ -87,7 +87,7 @@
                         </tr>
                         </thead>
                         <tbody>
-                        <tr ng-repeat="domain in option.domainList">
+                        <tr ng-repeat="domain in option.domainList | filter: option.enabledModel">
                             <td>{{domain.regex}}</td>
                             <td>{{domain.if_replace}}</td>
                             <td>{{domain.if_render}}</td>
@@ -125,7 +125,7 @@
                         </tr>
                         </thead>
                         <tbody>
-                        <tr ng-repeat="domain in option.domainList">
+                        <tr ng-repeat="domain in option.domainList | filter: option.enabledModel">
                             <td><input value="{{domain.regex}}"></td>
                             <td>{{domain.if_replace}}</td>
                             <td>{{domain.if_render}}</td>
