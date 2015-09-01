@@ -4,7 +4,7 @@ An extension that helps you enable MathJax rendering on custom domain, and repla
 
 ## Get It
 
-It is published at the [Chrome Web Store]: https://chrome.google.com/webstore/detail/math-as-you-will/dhclcadjnhmoimnlkbboigmihbebfmdc "Math as You Will".
+It is published at the [Chrome Web Store](https://chrome.google.com/webstore/detail/math-as-you-will/dhclcadjnhmoimnlkbboigmihbebfmdc "Math as You Will").
 
 ## Techs
 
@@ -22,4 +22,4 @@ Feel free to submit bugs, feature request or send pull requests on GitHub.
 
 ## Licence
 
-[The MIT License (MIT)]: http://rem.mit-license.org/.
+[The MIT License (MIT)](http://rem.mit-license.org/)
