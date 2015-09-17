@@ -1,9 +1,16 @@
-chrome.webRequest.onHeadersReceived.addListener(function(details) {
+//chrome.webRequest.onHeadersReceived.addListener(function(details) {
+//    chrome.browserAction.setBadgeText({text: "yeah"});
+//});
 
-});
+//chrome.webRequest.onCompleted.addListener(function() {
+//    chrome.browserAction.setBadgeText({text: "yeah"});
+//   console.log("The website is");
+//});
 
 // Show TeX code when pressing the icon.
 chrome.browserAction.onClicked.addListener(function (tab) {
+    chrome.browserAction.setBadgeText({text: "yeah"});
+    console.log("I am clicked!");
     chrome.tabs.executeScript(null, {
         code: "showTex();"
     });
@@ -15,7 +22,7 @@ var customConfigPrefix = 'MathJax.Hub.Config({tex2jax: {';
 var customConfigSuffix = 'processEscapes: true}})';
 var customConfigSuffix2 = 'processEscapes: true},';
 
-
+console.log("Background has begun!");
 
 
 // Determine the MathJax configuration
@@ -30,7 +37,7 @@ function GenerateConfig(domainUrl) {
             //processing
             var listLength = currentDomainList.length;
             for (var i = 0; i < listLength; i++) {
-                var matchPattern = new RegExp(currentDomainList[i][0]);
+                var matchPattern = new RegExp(currentDomainList[i].regex);
             }
         }
     });
@@ -49,6 +56,8 @@ function DebugSendMessage(message) {
 
 // On current tab loaded.
 chrome.tabs.onUpdated.addListener(function (tabId, info) {
+    chrome.browserAction.setBadgeText({text: "yeah"});
+    console.log("A tab has been loaded!");
     if (info.status === "complete") {
 
         storage.get('domainList', function (items) {
@@ -66,9 +75,9 @@ chrome.tabs.onUpdated.addListener(function (tabId, info) {
 
                     var ifReplace = false;
                     for (var i = 0; i < listLength; i++) {
-                        var matchPattern = new RegExp(currentDomainList[i][0]);
+                        var matchPattern = new RegExp(currentDomainList[i].regex);
                         if (domainUrl.match(matchPattern) != null) {
-                            ifReplace = (ifReplace || currentDomainList[i][1]);
+                            ifReplace = (ifReplace || currentDomainList[i].if_replace);
                         }
                     }
 
@@ -78,14 +87,14 @@ chrome.tabs.onUpdated.addListener(function (tabId, info) {
 
                     for (var i = 0; i < listLength; i++) {
 
-                        var matchPattern = new RegExp(currentDomainList[i][0]);
+                        var matchPattern = new RegExp(currentDomainList[i].regex);
 
                         if (domainUrl.match(matchPattern) != null) {
 
-                            ifRender = (ifRender || currentDomainList[i][2]);
+                            ifRender = (ifRender || currentDomainList[i].if_render);
 
                             if (currentDomainList[i][2] === true) {
-                                customConfigInline = (customConfigInline + "['" + currentDomainList[i][3] + "','" + currentDomainList[i][4] + "'],");
+                                customConfigInline = (customConfigInline + "['" + currentDomainList[i].r_left + "','" + currentDomainList[i].r_right + "'],");
                             }
                         }
                     }
@@ -101,15 +110,15 @@ chrome.tabs.onUpdated.addListener(function (tabId, info) {
 
                     for (var i = 0; i < listLength; i++) {
 
-                        var matchPattern = new RegExp(currentDomainList[i][0]);
+                        var matchPattern = new RegExp(currentDomainList[i].regex);
 
 
                         if (domainUrl.match(matchPattern) != null) {
-                            ifDisplay = (ifDisplay || (currentDomainList[i][5] && currentDomainList[i][2]));
+                            ifDisplay = (ifDisplay || (currentDomainList[i].inline && currentDomainList[i].if_render));
 
-                            if ((currentDomainList[i][5] && currentDomainList[i][2]) === true) {
-                                customConfigDisplay = (customConfigDisplay + "['" + currentDomainList[i][6] + "','" + currentDomainList[i][7] + "'],");
-                                customAlign = currentDomainList[i][8];
+                            if ((currentDomainList[i].inline && currentDomainList[i].if_render) === true) {
+                                customConfigDisplay = (customConfigDisplay + "['" + currentDomainList[i].i_left + "','" + currentDomainList[i].i_right + "'],");
+                                customAlign = currentDomainList[i].alignment;
                             }
                         }
                     }
