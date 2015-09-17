@@ -5,8 +5,13 @@
 // We need to check if the regex matches the current domain?
 // We can let the user choose whether to display all the regex or the regexes that match the current page....
 
+/**
+ *
+ */
 angular.module('MaYW_Popup', ['ngRoute'])
-
+/**
+ *
+ */
 .service('Rules', function() {
 
         var self = this;
@@ -71,6 +76,9 @@ angular.module('MaYW_Popup', ['ngRoute'])
     ])
 
 // write the router
+/**
+ *
+ */
 .config(function($routeProvider) {
     $routeProvider
         .when('/', {

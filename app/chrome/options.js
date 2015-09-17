@@ -1,4 +1,4 @@
-(function(angular) {
+(function (angular) {
     angular
         .module('MaYW', ['services'])
         .controller('OptionController', OptionPageController);
@@ -13,43 +13,34 @@
         //vm.delRow = delRow();
         //vm.resetRules = resetRules();
         vm.enabledModel = {isEnabled: true};
-        vm.domainList = [
-            {
-                regex: "This1",
-                if_replace: true,
-                if_render: true,
-                r_left: "F",
-                r_right: "R",
-                inline: true,
-                i_left: "C",
-                i_right: "F,",
-                alignment: "R",
-                old: true,
-                isEnabled: true
-            }, {domain: "This2", isEnabled: true}, {domain: "This3", isEnabled: false}
+        //vm.loadDomainList = loadDomainList;
 
+        vm.domainList = [
         ];
-        alert(vm.domainList);
+
+        vm.domainList = GetDomainList.get().then(alert(JSON.stringify(vm.domainList)));
+
+
         function loadDomainList() {
             alert("Fucked!");
             GetDomainList.get().then(
-                function(domainList) {
-                    vm.domainList = domainList.map(function(item) {
+                function (domainList) {
+                    vm.domainList = domainList.map(function (item) {
                         item.isEnabled = true;
                         return item;
                     });
                 },
-                function(message) {
+                function (message) {
                     // Do something with the message
                 });
         }
 
         function submitDomainList() {
-            domainList = domainList.filter(function(item) {
-               return item.isEnabled;
+            domainList = domainList.filter(function (item) {
+                return item.isEnabled;
             });
             SetDomainList.set(domainList).then(
-                function() {
+                function () {
                     // Do something with the message.
                 }
             )
@@ -57,11 +48,35 @@
 
         //loadDomainList();
 
-        function addRow() {
-            //vm.domainList.push({});
-        }
+        vm.addRow = function () {
+            vm.domainList.push({
+                regex: "",
+                if_replace: false,
+                if_render: false,
+                r_left: "",
+                r_right: "",
+                inline: false,
+                i_left: "",
+                i_right: "",
+                alignment: "",
+                old: true,
+                isEnabled: true
+            });
+        };
 
-        vm.delRow = function delRow(domain) {
+        vm.saveRules = function () {
+            vm.domainList = vm.domainList.filter(function (item) {
+                return item.isEnabled;
+            });
+            SetDomainList.set(vm.domainList).then(
+                function () {
+                    alert('Save successful!');
+                    // Do something with the message.
+                }
+            )
+        };
+
+        vm.delRow = function (domain) {
             alert(JSON.stringify(domain));
             domain.isEnabled = false;
         };

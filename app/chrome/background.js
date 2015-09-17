@@ -1,3 +1,7 @@
+chrome.webRequest.onHeadersReceived.addListener(function(details) {
+
+});
+
 // Show TeX code when pressing the icon.
 chrome.browserAction.onClicked.addListener(function (tab) {
     chrome.tabs.executeScript(null, {

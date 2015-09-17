@@ -52,7 +52,11 @@ function mathParsing(wolframMath) {
 
 }
 
-
+/**
+ *
+ * @param config
+ * @param config2
+ */
 function loadMathJax(config, config2) {
 
     var pathToMathJax = chrome.extension.getURL("MathJax/MathJax.js?config=TeX-AMS-MML_HTMLorMML");

@@ -61,56 +61,20 @@
 <body ng-app="MaYW" ng-csp>
 
 
-
-
 <div class="container-fluid" ng-controller="OptionController as option">
+    {{JSON.toString(option.domainList)}}
+    <div ng-repeat="domain in option.domainList | filter: option.enabledModel">
+        {{domain}}
+
+    </div>
     <div class="row">
         <div class="col-md-12">
             <h3 class="text-center">
                 Options
             </h3>
 
-{{option.domainList}}
             <div class="row">
-                <div class="col-md-10">
-                    <table class="table">
-                        <thead>
-                        <tr>
-                            <th rowspan="2">Regex that matches domain</th>
-                            <th rowspan="2">Replace</th>
-                            <th colspan="3">Render</th>
-
-                            <th colspan="3">Inline Render</th>
-
-                            <th>Align</th>
-                        </tr>
-                        <tr>
-
-                            <th>Switch</th>
-                            <th>L</th>
-                            <th>R</th>
-                            <th>Switch</th>
-                            <th>L</th>
-                            <th>R</th>
-                            <th>Align</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        <tr ng-repeat="domain in option.domainList | filter: option.enabledModel">
-                            <td>{{domain.regex}}</td>
-                            <td>{{domain.if_replace}}</td>
-                            <td>{{domain.if_render}}</td>
-                            <td>{{domain.r_left}}</td>
-                            <td>{{domain.r_right}}</td>
-                            <td>{{domain.inline}}</td>
-                            <td>{{domain.i_left}}</td>
-                            <td>{{domain.i_right}}</td>
-                            <td>{{domain.alignment}}</td>
-                            <td><button class="btn btn-primary">+</button></td>
-                            <td><button class="btn btn-success" type="button" ng-click="option.delRow(domain)">Save the Rules</button></td>
-                        </tr>
-                        </tbody>
-                    </table>
+                <div class="col-md-12">
                     <table class="table table-striped table-responsive table-hover table-bordered">
                         <thead>
                         <tr>
@@ -154,21 +118,23 @@
                                     <input name="alignment" value="right" type="radio"> R
                                 </label>
                             </td>
-                            <td><button class="btn btn-danger" type="button" ng-click="option.delRow(domain)">-</button></td>
-
+                            <td>
+                                <button class="btn btn-danger" type="button" ng-click="option.delRow(domain)">-</button>
+                            </td>
                         </tr>
                         </tbody>
                     </table>
                 </div>
-
             </div>
 
             <div class="col-md-12 vwrapper">
                 <div class="vcenter">
                     <div class=" vcenter">
                         <button class="btn btn-default" type="button" ng-click="option.addRow()">Add New Row</button>
-                        <button class="btn btn-success" type="button" ng-click="option.delRow($event)">Save the Rules</button>
-                        <button class="btn btn-danger" type="button" ng-click="option.resetRules()">Reset the Rules</button>
+                        <button class="btn btn-success" type="button" ng-click="option.saveRules()">Save the Rules
+                        </button>
+                        <button class="btn btn-danger" type="button" ng-click="option.resetRules()">Reset the Rules
+                        </button>
 
                     </div>
                 </div>
