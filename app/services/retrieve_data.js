@@ -21,7 +21,10 @@
                         alert(JSON.stringify(items.domainList));
                         deferred.resolve(items.domainList)
                     } else {
-                        deferred.resolve([]);
+                        alert("Original does not exist!");
+                        items.domainList = [];
+                        deferred.resolve(items.domainList);
+                        alert(JSON.stringify(items.domainList));
                         //deferred.reject('Get Storage Failed!');
                     }
                 });

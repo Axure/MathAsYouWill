@@ -15,10 +15,16 @@
         vm.enabledModel = {isEnabled: true};
         //vm.loadDomainList = loadDomainList;
 
-        vm.domainList = [
-        ];
+        vm.domainList = [];
 
-        vm.domainList = GetDomainList.get().then(alert(JSON.stringify(vm.domainList)));
+        GetDomainList.get().then(function (domainList) {
+            vm.domainList = domainList;
+            console.log(vm.domainList);
+            if (vm.domainList === []) {
+                console.log("Fucked");
+                vm.domainList = [];
+            }
+        });
 
 
         function loadDomainList() {

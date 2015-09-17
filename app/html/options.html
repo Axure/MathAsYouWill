@@ -62,11 +62,7 @@
 
 
 <div class="container-fluid" ng-controller="OptionController as option">
-    {{JSON.toString(option.domainList)}}
-    <div ng-repeat="domain in option.domainList | filter: option.enabledModel">
-        {{domain}}
 
-    </div>
     <div class="row">
         <div class="col-md-12">
             <h3 class="text-center">
@@ -99,14 +95,14 @@
                         </thead>
                         <tbody>
                         <tr ng-repeat="domain in option.domainList | filter: option.enabledModel">
-                            <td class="col-md-4"><input value="{{domain.regex}}" class="form-control"></td>
+                            <td class="col-md-4"><input ng-model="domain.regex"  class="form-control"></td>
                             <td><input type="checkbox" ng-model="domain.if_replace"></td>
                             <td><input type="checkbox" ng-model="domain.if_render"></td>
-                            <td><input value="{{domain.r_left}}" class="form-control"></td>
-                            <td><input value="{{domain.r_right}}" class="form-control"></td>
+                            <td><input ng-model="domain.r_left" class="form-control"></td>
+                            <td><input ng-model="domain.r_right" class="form-control"></td>
                             <td><input type="checkbox" ng-model="domain.inline"></td>
-                            <td><input value="{{domain.i_left}}" class="form-control"></td>
-                            <td><input value="{{domain.i_right}}" class="form-control"></td>
+                            <td><input ng-model="domain.i_left" class="form-control"></td>
+                            <td><input ng-model="domain.i_right" class="form-control"></td>
                             <td class="col-md-2">
                                 <label class="radio-inline">
                                     <input name="alignment" value="left" type="radio"> L
