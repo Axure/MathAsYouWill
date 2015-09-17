@@ -82,6 +82,8 @@ function loadMathJax(config, config2) {
 
 chrome.runtime.onMessage.addListener(
     function (request, sender, sendResponse) {
+        console.log("Page received message:");
+        console.log(request);
 
         if (request.render) {
             if (request.replace) {

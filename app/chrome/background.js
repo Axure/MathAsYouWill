@@ -66,12 +66,13 @@ chrome.tabs.onUpdated.addListener(function (tabId, info) {
                 var currentDomainList = items.domainList;
                 var listLength = currentDomainList.length;
 
-
+                console.log(currentDomainList);
                 chrome.tabs.get(tabId, function (tab) {
 
                     //	var current = tabs[0];
                     //	var tabId = current.id;
                     var domainUrl = tab.url;
+                    console.log("Domain url is "+ tab.url);
 
                     var ifReplace = false;
                     for (var i = 0; i < listLength; i++) {
@@ -93,7 +94,7 @@ chrome.tabs.onUpdated.addListener(function (tabId, info) {
 
                             ifRender = (ifRender || currentDomainList[i].if_render);
 
-                            if (currentDomainList[i][2] === true) {
+                            if (currentDomainList[i].if_render === true) {
                                 customConfigInline = (customConfigInline + "['" + currentDomainList[i].r_left + "','" + currentDomainList[i].r_right + "'],");
                             }
                         }
@@ -146,6 +147,12 @@ chrome.tabs.onUpdated.addListener(function (tabId, info) {
                     } else {
                         var customConfig = customConfigPrefix + customConfigInline + customConfigSuffix;
                     }
+
+                    console.log({
+                        replace: ifReplace,
+                        render: ifRender,
+                        config: customConfig
+                    });
 
                     chrome.tabs.get(tabId, function (tab) {
                         chrome.tabs.sendMessage(tab.id, {
