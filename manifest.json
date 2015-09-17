@@ -25,7 +25,6 @@
     "16": "icon16.png",
     "48": "icon48.png"
   },
-  "key": "MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQCAzYgfXSpt35dlRoB7vKnmDjQZV2hQRcr3NZAo6QahS9TF8ZmOSc+mL5xexml4bPGMHzMqg6bVUU6BKY/GH0dhD7igpNNuRwkZauvfxoyxtu0EOM04KFl4ZH6utOI4JWyojUuKEgiYmpiKpiJfAcnwXBtgGYOHePmzV8VhqG+TKwIDAQAB",
   "manifest_version": 2,
   "name": "Math as You Will",
   "options_page": "app/html/options.html",

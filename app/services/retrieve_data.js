@@ -17,14 +17,14 @@
 
                 storage.get('domainList', function (items) {
                     if (items.domainList) {
-                        alert("Got successful!");
-                        alert(JSON.stringify(items.domainList));
+                        console.log("Got successful!");
+                        console.log(JSON.stringify(items.domainList));
                         deferred.resolve(items.domainList)
                     } else {
-                        alert("Original does not exist!");
+                        console.log("Original does not exist!");
                         items.domainList = [];
                         deferred.resolve(items.domainList);
-                        alert(JSON.stringify(items.domainList));
+                        console.log(JSON.stringify(items.domainList));
                         //deferred.reject('Get Storage Failed!');
                     }
                 });

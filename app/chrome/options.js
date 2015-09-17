@@ -28,7 +28,7 @@
 
 
         function loadDomainList() {
-            alert("Fucked!");
+            console.log("Fucked!");
             GetDomainList.get().then(
                 function (domainList) {
                     vm.domainList = domainList.map(function (item) {
@@ -76,19 +76,19 @@
             });
             SetDomainList.set(vm.domainList).then(
                 function () {
-                    alert('Save successful!');
+                    console.log('Save successful!');
                     // Do something with the message.
                 }
             )
         };
 
         vm.delRow = function (domain) {
-            alert(JSON.stringify(domain));
+            console.log(JSON.stringify(domain));
             domain.isEnabled = false;
         };
 
         function resetRules() {
-            // Alert a message box for options.
+            // console.log a message box for options.
         }
 
     }

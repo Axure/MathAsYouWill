@@ -32,9 +32,8 @@ function showTex() {
 
 }
 
-
 function tempMathJax(){
-	var pathToMathJax = chrome.extension.getURL('MathJax/MathJax.js?config=TeX-AMS-MML_HTMLorMML');
+	var pathToMathJax = chrome.extension.getURL('components/MathJax/MathJax.js?config=TeX-AMS-MML_HTMLorMML');
 	var script = document.createElement('script');
 	script.type = 'text/javascript';
 	script.src = pathToMathJax;
@@ -59,7 +58,7 @@ function mathParsing(wolframMath) {
  */
 function loadMathJax(config, config2) {
 
-    var pathToMathJax = chrome.extension.getURL("MathJax/MathJax.js?config=TeX-AMS-MML_HTMLorMML");
+    var pathToMathJax = chrome.extension.getURL("components/MathJax/MathJax.js?config=TeX-AMS-MML_HTMLorMML");
     var script = document.createElement("script");
     script.src = pathToMathJax;
 
