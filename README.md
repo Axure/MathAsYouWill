@@ -20,6 +20,10 @@ In the wiki on GitHub.
 
 Feel free to submit bugs, feature request or send pull requests on GitHub.
 
+## Credits
+
+[csp-parse](https://github.com/c0nrad/csp-parse)
+
 ## Licence
 
 [The MIT License (MIT)](http://rem.mit-license.org/)
