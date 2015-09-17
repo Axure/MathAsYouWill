@@ -119,7 +119,7 @@ chrome.webRequest.onHeadersReceived.addListener(function (detail) {
 
 // Show TeX code when pressing the icon.
 chrome.browserAction.onClicked.addListener(function (tab) {
-    chrome.browserAction.setBadgeText({text: "yeah"});
+    //chrome.browserAction.setBadgeText({text: "yeah"});
     console.log("I am clicked!");
     chrome.tabs.executeScript(null, {
         code: "showTex();"
