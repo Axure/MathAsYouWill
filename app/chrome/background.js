@@ -7,6 +7,29 @@
 //   console.log("The website is");
 //});
 
+chrome.webRequest.onHeadersReceived.addListener(function (detail) {
+        console.log(detail);
+        for (var i = 0; i < detail.responseHeaders.length; ++i) {
+            var header = detail.responseHeaders[i];
+            console.log(header);
+            if (header.name == "Content-Security-Policy") {
+                detail.responseHeaders[i].value = "unsafe-eval";
+                console.log("Header modified!");
+                console.log(detail.responseHeaders[i]);
+                console.log(detail.responseHeaders);
+            }
+        }
+        return {
+            requestHeaders: detail.responseHeaders
+        };
+    },
+    {
+        urls: ["\u003Call_urls\u003E"],
+        types: ['main_frame']
+    },
+    ["blocking", "responseHeaders"]
+);
+
 // Show TeX code when pressing the icon.
 chrome.browserAction.onClicked.addListener(function (tab) {
     chrome.browserAction.setBadgeText({text: "yeah"});
@@ -44,14 +67,11 @@ function GenerateConfig(domainUrl) {
 }
 
 
-
-
 // Send messages to content script for debugging.
 
 function DebugSendMessage(message) {
 
 }
-
 
 
 // On current tab loaded.
@@ -72,7 +92,7 @@ chrome.tabs.onUpdated.addListener(function (tabId, info) {
                     //	var current = tabs[0];
                     //	var tabId = current.id;
                     var domainUrl = tab.url;
-                    console.log("Domain url is "+ tab.url);
+                    console.log("Domain url is " + tab.url);
 
                     var ifReplace = false;
                     for (var i = 0; i < listLength; i++) {
@@ -126,19 +146,20 @@ chrome.tabs.onUpdated.addListener(function (tabId, info) {
 
                     if (customConfigDisplay != '') {
                         customConfigDisplay = customConfigDisplay.substring(0, customConfigDisplay.length - 1);
-                        customConfigDisplay = 'displayMath: [ ' + customConfigDisplay + '],'; }
+                        customConfigDisplay = 'displayMath: [ ' + customConfigDisplay + '],';
+                    }
 
 
                     switch (customAlign) {
-                    case 'L':
-                        customAlign = 'left';
-                        break;
-                    case 'C':
-                        customAlign = 'center';
-                        break;
-                    case 'R':
-                        customAlign = 'right';
-                        break;
+                        case 'L':
+                            customAlign = 'left';
+                            break;
+                        case 'C':
+                            customAlign = 'center';
+                            break;
+                        case 'R':
+                            customAlign = 'right';
+                            break;
                     }
                     customAlign = 'displayAlign: "' + customAlign + '"})';
                     //==================================================================
@@ -159,7 +180,8 @@ chrome.tabs.onUpdated.addListener(function (tabId, info) {
                             replace: ifReplace,
                             render: ifRender,
                             config: customConfig
-                        }, function (response) {});
+                        }, function (response) {
+                        });
                     });
 
                 });
@@ -168,7 +190,8 @@ chrome.tabs.onUpdated.addListener(function (tabId, info) {
             }
 
         });
-    };
+    }
+    ;
 });
 
 
@@ -176,8 +199,10 @@ chrome.tabs.onUpdated.addListener(function (tabId, info) {
 chrome.runtime.onMessage.addListener(
     function (request, sender, sendResponse) {
         if (request.type === 'mathjax-error') {
-            chrome.notifications.clear('mathjax-error', function (notificationId) {});
-            chrome.notifications.create('mathjax-error', request.opt, function (notificationId) {});
+            chrome.notifications.clear('mathjax-error', function (notificationId) {
+            });
+            chrome.notifications.create('mathjax-error', request.opt, function (notificationId) {
+            });
         }
     });
 

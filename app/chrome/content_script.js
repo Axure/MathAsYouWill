@@ -107,7 +107,9 @@ chrome.runtime.onMessage.addListener(
         }
     });
 
-
+function hasClass(element, cls) {
+    return (' ' + element.className + ' ').indexOf(' ' + cls + ' ') > -1;
+}
 
 function ReplacePictures() {
 
@@ -120,7 +122,7 @@ function ReplacePictures() {
 
         var img = images[i];
 
-        if (img.className === "tex" || img.className === "latex" || img.className === "inlineforrmula") {
+        if (hasClass(img, "tex") || hasClass(img, "latex") || hasClass(img, "inlineforrmula")) {
             var script = document.createElement("script");
             if (img.parentNode.tagName === "DD") {
                 script.type = "math/tex; mode=display";
@@ -131,7 +133,7 @@ function ReplacePictures() {
             img.parentNode.replaceChild(script, img);
         }
 
-        if (img.className === "latexcenter" || img.className === "numbereddequation") {
+        if (hasClass(img, "latexcenter") || hasClass(img, "numbereddequation")) {
             var script = document.createElement("script");
             script.type = "math/tex; mode=display";
             script.text = img.alt;
