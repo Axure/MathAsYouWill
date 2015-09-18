@@ -2,6 +2,9 @@ var defaultConfig = 'MathJax.Hub.Config({config: ["MMLorHTML.js"],extensions:["T
 
 var defaultConfig2 = 'MathJax.Hub.Config({tex2jax: {inlineMath: [ ["$","$"]],displayMath: [ ["$$","$$"]],processEscapes: true},displayAlign: "left"})';
 
+/**
+ * Show the LaTeX code rendered.
+ */
 function showTex() {
 
     //Replace the Mathjax with Tex Code
@@ -32,19 +35,22 @@ function showTex() {
 
 }
 
-function tempMathJax(){
-	var pathToMathJax = chrome.extension.getURL('components/MathJax/MathJax.js?config=TeX-AMS-MML_HTMLorMML');
-	var script = document.createElement('script');
-	script.type = 'text/javascript';
-	script.src = pathToMathJax;
+/**
+ * Temporarily load MathJax script.
+ */
+function tempMathJax() {
+    var pathToMathJax = chrome.extension.getURL('components/MathJax/MathJax.js?config=TeX-AMS-MML_HTMLorMML');
+    var script = document.createElement('script');
+    script.type = 'text/javascript';
+    script.src = pathToMathJax;
 
-	document.getElementsByTagName("head")[0].appendChild(script);
-	
-	var script2 = document.createElement('script');
-	script2.type = 'text/x-mathjax-config';
-	script2.text = 'MathJax.Hub.Config({config: ["MMLorHTML.js"],extensions:["TeX/bbox.js","TeX/color.js","TeX/noErrors.js","TeX/noUndefined.js","TeX/AMSmath.js","TeX/AMSsymbols.js","TeX/AMScd.js","TeX/autobold.js"],jax:["input/TeX"],tex2jax: {inlineMath: [ ["$","$"]],displayMath: [ ["$$","$$"]],processEscapes: true},displayAlign: "left"});MathJax.Hub.Startup.onload()';
+    document.getElementsByTagName("head")[0].appendChild(script);
 
-	document.getElementsByTagName("head")[0].appendChild(script2);	
+    var script2 = document.createElement('script');
+    script2.type = 'text/x-mathjax-config';
+    script2.text = 'MathJax.Hub.Config({config: ["MMLorHTML.js"],extensions:["TeX/bbox.js","TeX/color.js","TeX/noErrors.js","TeX/noUndefined.js","TeX/AMSmath.js","TeX/AMSsymbols.js","TeX/AMScd.js","TeX/autobold.js"],jax:["input/TeX"],tex2jax: {inlineMath: [ ["$","$"]],displayMath: [ ["$$","$$"]],processEscapes: true},displayAlign: "left"});MathJax.Hub.Startup.onload()';
+
+    document.getElementsByTagName("head")[0].appendChild(script2);
 }
 
 function mathParsing(wolframMath) {
@@ -52,9 +58,10 @@ function mathParsing(wolframMath) {
 }
 
 /**
+ * Load MathJax according to the two configurations.
  *
- * @param config
- * @param config2
+ * @param config The first configuration.
+ * @param config2 The second configuration.
  */
 function loadMathJax(config, config2) {
 
@@ -78,8 +85,9 @@ function loadMathJax(config, config2) {
 }
 
 
-
-
+/**
+ * Listen from the background.
+ */
 chrome.runtime.onMessage.addListener(
     function (request, sender, sendResponse) {
         console.log("Page received message:");
@@ -107,10 +115,20 @@ chrome.runtime.onMessage.addListener(
         }
     });
 
+/**
+ * Determine whether an element has the given class.
+ *
+ * @param element
+ * @param cls
+ * @returns {boolean}
+ */
 function hasClass(element, cls) {
     return (' ' + element.className + ' ').indexOf(' ' + cls + ' ') > -1;
 }
 
+/**
+ * Replace the math rendered to images.
+ */
 function ReplacePictures() {
 
     // Get images

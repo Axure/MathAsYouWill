@@ -1,11 +1,10 @@
-//chrome.webRequest.onHeadersReceived.addListener(function(details) {
-//    chrome.browserAction.setBadgeText({text: "yeah"});
-//});
-
-//chrome.webRequest.onCompleted.addListener(function() {
-//    chrome.browserAction.setBadgeText({text: "yeah"});
-//   console.log("The website is");
-//});
+/**
+ * The object to parse CSP.
+ *
+ * @param policy The CSP to be parsed.
+ * @returns {Policy}
+ * @constructor
+ */
 function Policy(policy) {
     // Allow empty policies
     if (!policy) {
@@ -34,13 +33,13 @@ function Policy(policy) {
     return this;
 }
 
-Policy.prototype.get = function(directive) {
+Policy.prototype.get = function (directive) {
     if (!this.directives[directive])
         return '';
     return this.directives[directive];
 };
 
-Policy.prototype.add = function(directive, value) {
+Policy.prototype.add = function (directive, value) {
     if (!this.directives[directive]) {
         this.directives[directive] = value;
     } else {
@@ -49,7 +48,7 @@ Policy.prototype.add = function(directive, value) {
     return this.directives[directive];
 };
 
-Policy.prototype.set = function(directive, value) {
+Policy.prototype.set = function (directive, value) {
     if (!value) {
         delete this.directives[directive];
         return;
@@ -58,7 +57,7 @@ Policy.prototype.set = function(directive, value) {
     return this.directives[directive];
 };
 
-Policy.prototype.remove = function(directive, value) {
+Policy.prototype.remove = function (directive, value) {
     if (!this.directives[directive]) {
         return;
     } else {
@@ -71,7 +70,7 @@ Policy.prototype.remove = function(directive, value) {
     }
 };
 
-Policy.prototype.toString = Policy.prototype.string = function() {
+Policy.prototype.toString = Policy.prototype.string = function () {
     var out = '';
     for (var directive in this.directives) {
         if (this.directives[directive]) {
@@ -81,16 +80,19 @@ Policy.prototype.toString = Policy.prototype.string = function() {
     return out.trim();
 };
 
-Policy.prototype.toPrettyString = Policy.prototype.prettyString = function() {
+Policy.prototype.toPrettyString = Policy.prototype.prettyString = function () {
     var out = '';
     for (var directive in this.directives) {
         if (this.directives[directive]) {
-            out += directive+'\n\t'+this.directives[directive]+';\n';
+            out += directive + '\n\t' + this.directives[directive] + ';\n';
         }
     }
-    return out.substring(0,out.length-1);
+    return out.substring(0, out.length - 1);
 };
 
+/**
+ * Modify the header to work on some pages with strict CSP.
+ */
 chrome.webRequest.onHeadersReceived.addListener(function (detail) {
         console.log(detail);
         for (var i = 0; i < detail.responseHeaders.length; ++i) {
@@ -117,7 +119,9 @@ chrome.webRequest.onHeadersReceived.addListener(function (detail) {
     ["blocking", "responseHeaders"]
 );
 
-// Show TeX code when pressing the icon.
+/**
+ * Show LaTeX code when pressing the icon.
+ */
 chrome.browserAction.onClicked.addListener(function (tab) {
     //chrome.browserAction.setBadgeText({text: "yeah"});
     console.log("I am clicked!");
@@ -126,7 +130,10 @@ chrome.browserAction.onClicked.addListener(function (tab) {
     });
 });
 
-// Define constants.
+/**
+ * Define the constants
+ * @type {!StorageArea}
+ */
 var storage = chrome.storage.local;
 var customConfigPrefix = 'MathJax.Hub.Config({tex2jax: {';
 var customConfigSuffix = 'processEscapes: true}})';
@@ -135,8 +142,11 @@ var customConfigSuffix2 = 'processEscapes: true},';
 console.log("Background has begun!");
 
 
-// Determine the MathJax configuration
-
+/**
+ * Generate the MathJax configuration according to the current domain.
+ *
+ * @param domainUrl The current domain URL.
+ */
 function GenerateConfig(domainUrl) {
     //read options from storage
     storage.get('domainList', function (items) {
@@ -160,8 +170,9 @@ function DebugSendMessage(message) {
 
 }
 
-
-// On current tab loaded.
+/**
+ * On current tab loaded, load the domain list and generate the configurations.
+ */
 chrome.tabs.onUpdated.addListener(function (tabId, info) {
     chrome.browserAction.setBadgeText({text: "yeah"});
     console.log("A tab has been loaded!");
@@ -293,12 +304,18 @@ chrome.runtime.onMessage.addListener(
         }
     });
 
-// Context menus
+/**
+ * Create entries in the context menu.
+ * @type {number}
+ */
 var refreshMathJax = chrome.contextMenus.create({
     'title': 'Load MathJax Temporarily',
     'onclick': LoadMathJaxTemporarily
 });
 
+/**
+ * Load MathJax temporarily.
+ */
 function LoadMathJaxTemporarily() {
     chrome.tabs.query({
         active: true,

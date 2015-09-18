@@ -1,6 +1,9 @@
 (function (angular, undefined) {
     'use strict';
 
+    /**
+     * The angular module `services`.
+     */
     angular
         .module('services', [])
         .service('GetDomainList', GetDomainList)
@@ -8,7 +11,18 @@
 
     var storage = chrome.storage.local;
 
+    /**
+     * Dependency injection.
+     * @type {string[]}
+     */
     GetDomainList.$inject = ['$q'];
+    /**
+     * The object to get domain list.
+     *
+     * @param $q
+     * @returns {{get: Function}}
+     * @constructor
+     */
     function GetDomainList($q) {
 
         return {
@@ -38,11 +52,12 @@
     }
 
     /**
-     *
+     * Dependency injection.
      * @type {string[]}
      */
     SetDomainList.$inject = ['$q'];
     /**
+     * The object set the domain list.
      *
      * @param $q
      * @returns {{set: Function}}
